@@ -3,4 +3,5 @@ module com.example.dino {
     requires javafx.graphics;
 
     exports com.example.dino;
+    exports com.example.dino.Sprites;
 }
