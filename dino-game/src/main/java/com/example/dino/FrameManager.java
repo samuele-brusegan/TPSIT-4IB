@@ -15,13 +15,14 @@ import javafx.scene.image.Image;
  * sono sulla prima riga, poi la seconda, ecc.
  * </p>
  *
- * @see Sprite
+ * @see com.example.dino.sprites.Sprite
  */
-public class AnimationFrames {
-    private Image img;
-    private double frameW, frameH;
-    private int imgPerRow;
-    private int numberOfFrames;
+public class FrameManager {
+    private final Image img;
+    private final double frameW;
+    private final double frameH;
+    private final int imgPerRow;
+    private final int numberOfFrames;
 
     /**
      * Costruttore che inizializza il manager con l'immagine e le dimensioni dei frame.
@@ -37,7 +38,7 @@ public class AnimationFrames {
      * @param frameW larghezza di un singolo frame
      * @param frameH altezza di un singolo frame
      */
-    public AnimationFrames(Image img, double frameW, double frameH) {
+    public FrameManager(Image img, double frameW, double frameH) {
         this.img = img;
         this.frameW = frameW;
         this.frameH = frameH;

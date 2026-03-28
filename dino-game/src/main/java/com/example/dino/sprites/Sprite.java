@@ -1,6 +1,6 @@
-package com.example.dino.Sprites;
+package com.example.dino.sprites;
 
-import com.example.dino.AnimationFrames;
+import com.example.dino.FrameManager;
 import com.example.dino.Position;
 import com.example.dino.Speed;
 import javafx.geometry.BoundingBox;
@@ -8,7 +8,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 /**
  * Classe base per tutti gli sprite del gioco.
@@ -23,8 +22,8 @@ import javafx.scene.shape.Rectangle;
  * </p>
  *
  * @see Gino
- * @see CollisionDetector
- * @see AnimationFrames
+ * @see com.example.dino.CollisionDetector
+ * @see FrameManager
  */
 public class Sprite {
     private Position pos;
@@ -35,7 +34,7 @@ public class Sprite {
 
     private Speed speed;
 
-    private final AnimationFrames aframes;
+    private final FrameManager aframes;
     private int frameNumber;
 
     private double scale = 1;
@@ -56,7 +55,7 @@ public class Sprite {
      * @param frameNumber frame iniziale da visualizzare
      * @param scale fattore di scala per lo sprite
      */
-    public Sprite(Position pos, Speed speed, double screenWidth, double screenHeight,  AnimationFrames aframes, int frameNumber, double scale) {
+    public Sprite(Position pos, Speed speed, double screenWidth, double screenHeight, FrameManager aframes, int frameNumber, double scale) {
         this.pos = pos;
         this.speed = speed;
         this.screenWidth = screenWidth;
@@ -73,15 +72,15 @@ public class Sprite {
      * @param speed velocità iniziale
      * @param screenWidth larghezza dello schermo
      * @param screenHeight altezza dello schermo
-     * @param aframes manager per i frame dell'animazione
+     * @param fm manager per i frame dell'animazione
      * @param frameNumber frame iniziale da visualizzare
      */
-    public Sprite(Position pos, Speed speed, double screenWidth, double screenHeight,  AnimationFrames aframes, int frameNumber) {
+    public Sprite(Position pos, Speed speed, double screenWidth, double screenHeight, FrameManager fm, int frameNumber) {
         this.pos = pos;
         this.speed = speed;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        this.aframes = aframes;
+        this.aframes = fm;
         this.frameNumber = frameNumber;
     }
 
@@ -178,12 +177,13 @@ public class Sprite {
     public boolean isOutOfBounds(){
         double x = pos.getX();
         double y = pos.getY();
-        return (x<0 || x>screenWidth || y<0 || y>screenHeight);
+        double tolleranza = 25;
+        return (x<0-tolleranza || x>screenWidth+tolleranza || y<0-tolleranza || y>screenHeight+tolleranza);
     }
     protected long getCounter() {
         return counter;
     }
-    protected AnimationFrames getAframes() {
+    protected FrameManager getAframes() {
         return aframes;
     }
 
@@ -253,7 +253,7 @@ public class Sprite {
             offsetY = customHitboxOffsetY;
         } else {
             // Altrimenti calcola la hitbox dal frame con padding
-            AnimationFrames af = getAframes();
+            FrameManager af = getAframes();
             double w = aframes.getFrameW() * scale;
             double h = aframes.getFrameH() * scale;
             double paddingX = w * 0.15;  // 15% di spazio vuoto a dx e sx

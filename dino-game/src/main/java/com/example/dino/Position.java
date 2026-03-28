@@ -3,7 +3,7 @@ package com.example.dino;
 /**
  * Rappresenta una coordinata 2D (x, y) nello spazio di gioco.
  * <p>
- * Classe immutabile? No,Mutable: le coordinate possono essere modificate
+ * Classe immutabile? No, Mutable: le coordinate possono essere modificate
  * tramite i metodi setter o {@link #update(Speed)}.
  * </p>
  *

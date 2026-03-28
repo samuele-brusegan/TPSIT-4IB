@@ -18,7 +18,7 @@ import java.util.List;
  * @see CollisionListener
  */
 public class CollisionDetector {
-    private List<CollisionListener> listeners = new ArrayList<>();
+    private final List<CollisionListener> listeners = new ArrayList<>();
 
     /**
      * Aggiunge un listener per le notifiche di collisione.
@@ -28,7 +28,7 @@ public class CollisionDetector {
     public void addListener(CollisionListener cl) { listeners.add(cl); }
 
     /**
-     * Verifica se due hitbox siintersecano e notifica i listener in caso positivo.
+     * Verifica se due hitbox si intersecano e notifica i listener in caso positivo.
      *
      * @param dinoHitbox hitbox del giocatore (Gino)
      * @param cactusHitbox hitbox dell'ostacolo (roccia)

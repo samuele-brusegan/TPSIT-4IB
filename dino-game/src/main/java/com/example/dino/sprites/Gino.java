@@ -1,9 +1,8 @@
-package com.example.dino.Sprites;
+package com.example.dino.sprites;
 
-import com.example.dino.AnimationFrames;
+import com.example.dino.FrameManager;
 import com.example.dino.Position;
 import com.example.dino.Speed;
-import javafx.scene.shape.Rectangle;
 
 /**
  * Il personaggio giocabile (Gino) con fisica di salto e gravità.
@@ -26,9 +25,9 @@ import javafx.scene.shape.Rectangle;
 public class Gino extends Sprite {
 
     private boolean onGround;
-    private double groundY;
-    private final double gravity      = 2000;     // pixel/s^2
-    private final double jumpVelocity = -750; // pixel/s
+    private final double groundY;
+    private double gravity      = 2000;     // pixel/s^2
+    private double jumpVelocity = -750; // pixel/s
 
     /**
      * Costruttore per Gino senza scala personalizzata.
@@ -37,12 +36,12 @@ public class Gino extends Sprite {
      * @param speed velocità iniziale
      * @param screenWidth larghezza dello schermo
      * @param screenHeight altezza dello schermo
-     * @param aframes manager per i frame dell'animazione
+     * @param fm manager per i frame dell'animazione
      * @param frameNumber frame iniziale
      * @param groundY coordinata Y del terreno (dove Gino si ferma)
      */
-    public Gino(Position pos, Speed speed, double screenWidth, double screenHeight, AnimationFrames aframes, int frameNumber, double groundY) {
-        super(pos, speed, screenWidth, screenHeight, aframes, frameNumber);
+    public Gino(Position pos, Speed speed, double screenWidth, double screenHeight, FrameManager fm, int frameNumber, double groundY) {
+        super(pos, speed, screenWidth, screenHeight, fm, frameNumber);
         this.groundY = groundY;
         this.onGround = true;
     }
@@ -59,7 +58,7 @@ public class Gino extends Sprite {
      * @param scale fattore di scala dello sprite
      * @param groundY coordinata Y del terreno (dove Gino si ferma)
      */
-    public Gino(Position pos, Speed speed, double screenWidth, double screenHeight, AnimationFrames aframes, int frameNumber, double scale, double groundY) {
+    public Gino(Position pos, Speed speed, double screenWidth, double screenHeight, FrameManager aframes, int frameNumber, double scale, double groundY) {
         super(pos, speed, screenWidth, screenHeight, aframes, frameNumber, scale);
         this.groundY = groundY;
         this.onGround = true;
@@ -108,5 +107,21 @@ public class Gino extends Sprite {
             getSpeed().setVy(0);
             onGround = true;
         }
+    }
+
+    public double getGravity() {
+        return gravity;
+    }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
+    }
+
+    public double getJumpVelocity() {
+        return jumpVelocity;
+    }
+
+    public void setJumpVelocity(double jumpVelocity) {
+        this.jumpVelocity = jumpVelocity;
     }
 }
